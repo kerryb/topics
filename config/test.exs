@@ -26,11 +26,11 @@ config :topics, Topics.Repo,
   hostname: "localhost",
   database: "topics_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
-  # We don't run a server during test. If one is required,
-  # you can enable the server option below.
   pool_size: System.schedulers_online() * 2
 
 config :topics, TopicsWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "vbNiCd4PF3u8V2Ktp+0KBktqLH7fqjs/QUorutFakUutBoy5ESGxdjLvMQLoGTxb",
+  # We don't run a server during test. If one is required,
+  # you can enable the server option below.
   server: false

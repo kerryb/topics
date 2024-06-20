@@ -20,6 +20,7 @@ defmodule TopicsWeb.ConnCase do
   using do
     quote do
       use TopicsWeb, :verified_routes
+
       import Phoenix.ConnTest
       import Plug.Conn
       import TopicsWeb.ConnCase
