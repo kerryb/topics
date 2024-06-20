@@ -23,8 +23,6 @@ config :swoosh, :api_client, false
 config :topics, Topics.Mailer, adapter: Swoosh.Adapters.Test
 
 config :topics, Topics.Repo,
-  username: "postgres",
-  password: "postgres",
   hostname: "localhost",
   database: "topics_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
