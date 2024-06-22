@@ -27,5 +27,13 @@ defmodule TopicsWeb.HomeLiveTest do
 
       assert view |> element(".suggestion .title", "Something") |> has_element?()
     end
+
+    test "allows suggestions to be added", %{conn: conn} do
+      {:ok, view, _html} = live(conn, "/")
+
+      view |> element("form") |> render_submit(%{"suggestion" => %{"title" => "Something"}})
+
+      assert view |> element(".suggestion .title", "Something") |> has_element?()
+    end
   end
 end
