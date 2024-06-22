@@ -1,4 +1,4 @@
-defmodule Topics.Topic.Suggestion do
+defmodule Topics.Suggestions.Suggestion do
   @moduledoc false
   use Ecto.Schema
 

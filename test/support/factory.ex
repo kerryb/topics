@@ -2,7 +2,7 @@ defmodule Topics.Factory do
   @moduledoc false
   alias Faker.Lorem
   alias Topics.Repo
-  alias Topics.Topic.Suggestion
+  alias Topics.Suggestions.Suggestion
 
   def build(factory_name, attributes) do
     factory_name |> build() |> struct!(attributes)

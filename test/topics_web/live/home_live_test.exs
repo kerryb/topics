@@ -5,6 +5,8 @@ defmodule TopicsWeb.HomeLiveTest do
   import Phoenix.LiveViewTest
   import Topics.Factory
 
+  alias Topics.Suggestions
+
   @endpoint TopicsWeb.Endpoint
 
   describe "TopicsWeb.HomeLive" do
@@ -16,6 +18,14 @@ defmodule TopicsWeb.HomeLiveTest do
 
       assert view |> element(".suggestion .title", "Something interesting") |> has_element?()
       assert view |> element(".suggestion .title", "Another thing") |> has_element?()
+    end
+
+    test "appends new suggestions", %{conn: conn} do
+      {:ok, view, _html} = live(conn, "/")
+
+      Suggestions.create_suggestion(%{title: "Something"})
+
+      assert view |> element(".suggestion .title", "Something") |> has_element?()
     end
   end
 end

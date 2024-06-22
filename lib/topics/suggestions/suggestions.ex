@@ -1,12 +1,12 @@
-defmodule Topics.Topic do
+defmodule Topics.Suggestions do
   @moduledoc """
-  The Topic context.
+  The Suggestions context.
   """
 
   import Ecto.Query, warn: false
 
   alias Topics.Repo
-  alias Topics.Topic.Suggestion
+  alias Topics.Suggestions.Suggestion
 
   @doc """
   Returns the list of suggestions.
@@ -50,9 +50,16 @@ defmodule Topics.Topic do
 
   """
   def create_suggestion(attrs \\ %{}) do
-    %Suggestion{}
-    |> Suggestion.changeset(attrs)
-    |> Repo.insert()
+    case %Suggestion{}
+         |> Suggestion.changeset(attrs)
+         |> Repo.insert() do
+      {:ok, suggestion} ->
+        Phoenix.PubSub.broadcast!(Topics.PubSub, "suggestions", {:suggestion_created, suggestion})
+        {:ok, suggestion}
+
+      error ->
+        error
+    end
   end
 
   @doc """

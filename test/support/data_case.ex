@@ -24,6 +24,7 @@ defmodule Topics.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Topics.DataCase
+      import Topics.Factory
 
       alias Topics.Repo
     end
