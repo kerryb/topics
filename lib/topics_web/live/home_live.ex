@@ -7,6 +7,6 @@ defmodule TopicsWeb.HomeLive do
 
   @impl LiveView
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, suggestions: Topic.list_suggestions())}
+    {:ok, stream(socket, :suggestions, Topic.list_suggestions())}
   end
 end

@@ -1,3 +1,5 @@
-<div :for={suggestion <- @suggestions} class="suggestion">
-  <div class="title"><%= suggestion.title %></div>
+<div id="suggestions" phx-update="stream">
+  <div :for={{dom_id, suggestion} <- @streams.suggestions} id={dom_id} class="suggestion">
+    <div class="title"><%= suggestion.title %></div>
+  </div>
 </div>
