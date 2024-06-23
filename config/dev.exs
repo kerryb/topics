@@ -48,6 +48,23 @@ config :topics, TopicsWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:topics, ~w(--watch)]}
   ]
 
+# Watch static and templates for browser reloading.
+
+config :topics, TopicsWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/topics_web/(controllers|live|components)/.*(ex|heex)$"
+    ]
+  ]
+
+config :topics, :ldap,
+  host: "ipa.demo1.freeipa.org",
+  port: 389,
+  bind_dn_pattern: "uid=~s,cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org",
+  use_ssl: false
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
@@ -70,16 +87,6 @@ config :topics, TopicsWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-
-# Watch static and templates for browser reloading.
-config :topics, TopicsWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/topics_web/(controllers|live|components)/.*(ex|heex)$"
-    ]
-  ]
 
 # Enable dev routes for dashboard and mailbox
 config :topics, dev_routes: true

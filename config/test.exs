@@ -13,15 +13,14 @@ config :phoenix_live_view,
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false
 
-# Configure your database
-#
-# The MIX_TEST_PARTITION environment variable can be used
-
 # In test we don't send emails
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :topics, Topics.Mailer, adapter: Swoosh.Adapters.Test
 
+# Configure your database
+#
+# The MIX_TEST_PARTITION environment variable can be used
 config :topics, Topics.Repo,
   hostname: "localhost",
   database: "topics_test#{System.get_env("MIX_TEST_PARTITION")}",
@@ -34,3 +33,9 @@ config :topics, TopicsWeb.Endpoint,
   # We don't run a server during test. If one is required,
   # you can enable the server option below.
   server: false
+
+config :topics, :ldap,
+  host: "ipa.demo1.freeipa.org",
+  port: 389,
+  bind_dn_pattern: "uid=~s,cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org",
+  use_ssl: false
