@@ -1,7 +1,8 @@
 defmodule Topics.Users.AuthTest do
   @moduledoc """
-  Tests use [Online LDAP Test
-  Server](https://www.forumsys.com/2022/05/10/online-ldap-test-server/).
+  Tests for ldap authentication. The `test` environment is configured to
+  connect to the [FreeIPA demo server](https://www.freeipa.org/page/Demo)
+  rather than the real BT server.
   """
   use Topics.DataCase, async: true
 

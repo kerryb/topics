@@ -18,3 +18,9 @@ config :swoosh, local: false
 # which you should run after static files are built and
 # before starting your production server.
 config :topics, TopicsWeb.Endpoint, cache_static_manifest: "priv/static/cache_manifest.json"
+
+config :topics, :ldap,
+  host: "iuserldap.nat.bt.com",
+  port: 636,
+  bind_dn_pattern: "cn=~s,ou=employee,ou=btplc,dc=iuser,dc=iroot,dc=adidom,dc=com",
+  use_ssl: true
