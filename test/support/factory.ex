@@ -1,6 +1,5 @@
 defmodule Topics.Factory do
   @moduledoc false
-  alias Faker.Internet
   alias Faker.Lorem
   alias Faker.Person
   alias Topics.Auth.User
@@ -22,9 +21,7 @@ defmodule Topics.Factory do
   def build(:user) do
     %User{
       name: Person.name(),
-      username: to_string(:rand.uniform(99_999_999) + 100_000_000),
-      password: Lorem.sentence(4),
-      email: Internet.email()
+      username: to_string(:rand.uniform(99_999_999) + 100_000_000)
     }
   end
 end
