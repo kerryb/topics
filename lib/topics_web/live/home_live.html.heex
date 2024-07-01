@@ -3,9 +3,11 @@
     <div class="title"><%= suggestion.title %></div>
   </div>
 </div>
-<.simple_form for={@form} phx-submit="create">
-  <.input field={@form[:title]} label="Title" />
-  <:actions>
-    <.button>Add</.button>
-  </:actions>
-</.simple_form>
+<%= if @user do %>
+  <.simple_form for={@form} phx-submit="create">
+    <.input field={@form[:title]} label="Title" />
+    <:actions>
+      <.button>Add</.button>
+    </:actions>
+  </.simple_form>
+<% end %>

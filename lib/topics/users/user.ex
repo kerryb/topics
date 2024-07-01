@@ -1,4 +1,4 @@
-defmodule Topics.Auth.User do
+defmodule Topics.Users.User do
   @moduledoc false
   use Ecto.Schema
 

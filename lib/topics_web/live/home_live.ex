@@ -5,16 +5,20 @@ defmodule TopicsWeb.HomeLive do
   alias Phoenix.LiveView
   alias Topics.Suggestions
   alias Topics.Suggestions.Suggestion
+  alias Topics.Users
 
   @impl LiveView
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     if connected?(socket) do
       Phoenix.PubSub.subscribe(Topics.PubSub, "suggestions")
     end
 
     {:ok,
      socket
-     |> assign(form: to_form(Suggestions.change_suggestion(%Suggestion{})))
+     |> assign(
+       user: Users.get_user(session["user_id"]),
+       form: to_form(Suggestions.change_suggestion(%Suggestion{}))
+     )
      |> stream(:suggestions, Suggestions.list_suggestions())}
   end
 
