@@ -9,7 +9,12 @@ defmodule TopicsWeb.HomeLiveTest do
 
   @endpoint TopicsWeb.Endpoint
 
-  describe "TopicsWeb.HomeLive" do
+  describe "TopicsWeb.HomeLive, when signed in" do
+    setup %{conn: conn} do
+      user = insert!(:user)
+      %{conn: conn |> SessionHelper.prepare_session() |> put_session(:user_id, user.id)}
+    end
+
     test "shows existing suggestions", %{conn: conn} do
       insert!(:suggestion, title: "Something interesting")
       insert!(:suggestion, title: "Another thing")
@@ -28,7 +33,7 @@ defmodule TopicsWeb.HomeLiveTest do
       assert view |> element(".suggestion .title", "Something") |> has_element?()
     end
 
-    test "allows suggestions to be added", %{conn: conn} do
+    test "allows suggestions to be added when signed in", %{conn: conn} do
       {:ok, view, _html} = live(conn, "/")
 
       view |> element("form") |> render_submit(%{"suggestion" => %{"title" => "Something"}})

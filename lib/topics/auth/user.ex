@@ -1,5 +1,7 @@
 defmodule Topics.Auth.User do
+  @moduledoc false
   use Ecto.Schema
+
   import Ecto.Changeset
 
   schema "users" do
@@ -9,6 +11,9 @@ defmodule Topics.Auth.User do
     field :email, :string
 
     timestamps(type: :utc_datetime)
+
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
   end
 
   @doc false
