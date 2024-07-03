@@ -1,0 +1,7 @@
+<.simple_form for={@form} phx-submit="login">
+  <.input field={@form[:username]} label="Username (EIN)" />
+  <.input type="password" field={@form[:password]} label="IUSER Password" />
+  <:actions>
+    <.button>Log in</.button>
+  </:actions>
+</.simple_form>

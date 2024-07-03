@@ -1,4 +1,4 @@
-defmodule Topics.Users.Auth do
+defmodule Topics.Users.LDAP do
   @moduledoc """
   Authenticates a user against LDAP.
   """

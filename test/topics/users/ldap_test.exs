@@ -1,4 +1,4 @@
-defmodule Topics.Users.AuthTest do
+defmodule Topics.Users.LDAPTest do
   @moduledoc """
   Tests for ldap authentication. The `test` environment is configured to
   connect to the [FreeIPA demo server](https://www.freeipa.org/page/Demo)
@@ -6,13 +6,13 @@ defmodule Topics.Users.AuthTest do
   """
   use Topics.DataCase, async: true
 
-  alias Topics.Users.Auth
+  alias Topics.Users.LDAP
 
   test "returns true if LDAP bind succeeds" do
-    assert Auth.validate("employee", "Secret123")
+    assert LDAP.validate("employee", "Secret123")
   end
 
   test "returns false if LDAP bind fails" do
-    refute Auth.validate("employee", "wrong")
+    refute LDAP.validate("employee", "wrong")
   end
 end

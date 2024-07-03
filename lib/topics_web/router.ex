@@ -18,6 +18,7 @@ defmodule TopicsWeb.Router do
     pipe_through :browser
 
     live "/", HomeLive
+    live "/login", LoginLive
   end
 
   # Other scopes may use custom stacks.

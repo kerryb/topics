@@ -1,3 +1,8 @@
+<div>
+  <%= unless @user do %>
+    <p>Please <.link patch={~p"/login"}>log in</.link> to edit.</p>
+  <% end %>
+</div>
 <div id="suggestions" phx-update="stream">
   <div :for={{dom_id, suggestion} <- @streams.suggestions} id={dom_id} class="suggestion">
     <div class="title"><%= suggestion.title %></div>
