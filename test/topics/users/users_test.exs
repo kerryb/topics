@@ -1,6 +1,8 @@
 defmodule Topics.UsersTest do
   use Topics.DataCase
 
+  import Topics.Factory
+
   alias Topics.Users
   alias Topics.Users.User
 
@@ -81,9 +83,16 @@ defmodule Topics.UsersTest do
 
   describe "users.login/1 " do
     test "if authentication passes for a new user creates a user record" do
-      {:ok, user} = Users.login(%{"username" => "employee", "password" => "Secret123")
-      assert [%User{username: "employee", name: "Test Employee"}] = user
-      assert user == Users.get_user!(user.id)
+      {:ok, user} = Users.login("admin", "Secret123")
+      assert %User{username: "admin", name: "Administrator"} = user
+      assert [user] == Users.list_users()
+    end
+
+    test "if authentication passes for an existing user updates the name" do
+      insert!(:user, username: "admin", name: "Old Name")
+      {:ok, user} = Users.login("admin", "Secret123")
+      assert %User{username: "admin", name: "Administrator"} = user
+      assert [user] == Users.list_users()
     end
   end
 end

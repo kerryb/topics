@@ -6,6 +6,7 @@ defmodule Topics.Users do
   import Ecto.Query, warn: false
 
   alias Topics.Repo
+  alias Topics.Users.LDAP
   alias Topics.Users.User
 
   @doc """
@@ -124,5 +125,25 @@ defmodule Topics.Users do
   """
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
+  end
+
+  @doc """
+  Logs a user in.
+
+  If login succeeds, a user record is created if none exists. If a record
+  exists, the name is updated to match the one from LDAP.
+
+  ## Examples
+
+      iex> login(username, password)
+      {:ok, %User{})
+
+      iex> login(username, bad_password)
+      :error
+
+  """
+  def login(username, password) do
+    {:ok, name} = LDAP.validate(username, password)
+    Repo.insert(%User{username: username, name: name}, on_conflict: [set: [name: name]], conflict_target: :username)
   end
 end

@@ -37,5 +37,6 @@ config :topics, TopicsWeb.Endpoint,
 config :topics, :ldap,
   host: "ipa.demo1.freeipa.org",
   port: 389,
-  bind_dn_pattern: "uid=~s,cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org",
+  username_field: "uid",
+  base_dn: "cn=users,cn=accounts,dc=demo1,dc=freeipa,dc=org",
   use_ssl: false

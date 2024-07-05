@@ -21,6 +21,6 @@ config :topics, TopicsWeb.Endpoint, cache_static_manifest: "priv/static/cache_ma
 
 config :topics, :ldap,
   host: "iuserldap.nat.bt.com",
-  port: 636,
-  bind_dn_pattern: "cn=~s,ou=employee,ou=btplc,dc=iuser,dc=iroot,dc=adidom,dc=com",
+  username_field: "cn",
+  base_dn: "ou=employee,ou=btplc,dc=iuser,dc=iroot,dc=adidom,dc=com",
   use_ssl: true

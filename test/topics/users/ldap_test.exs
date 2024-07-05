@@ -8,11 +8,11 @@ defmodule Topics.Users.LDAPTest do
 
   alias Topics.Users.LDAP
 
-  test "returns true if LDAP bind succeeds" do
-    assert LDAP.validate("employee", "Secret123")
+  test "returns {:ok, name} if LDAP bind succeeds" do
+    assert LDAP.validate("admin", "Secret123") == {:ok, "Administrator"}
   end
 
-  test "returns false if LDAP bind fails" do
-    refute LDAP.validate("employee", "wrong")
+  test "returns {:error, reason} if LDAP bind fails" do
+    assert LDAP.validate("admin", "wrong") == {:error, :invalidCredentials}
   end
 end
